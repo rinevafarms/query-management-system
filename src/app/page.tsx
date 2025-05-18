@@ -5,17 +5,15 @@ import QueryForm from '../components/QueryForm';
 import QueryList from '../components/QueryList';
 import { Prisma } from '@prisma/client';
 
-interface HomeProps {
-  queries: any[];
-}
-
-export default function Home({ queries }: HomeProps) {
+export default function Home() {
   const [activeTab, setActiveTab] = useState('new');
-  const [recentQueries, setRecentQueries] = useState(queries);
+  const [recentQueries, setRecentQueries] = useState([]);
 
   useEffect(() => {
-    setRecentQueries(queries);
-  }, [queries]);
+    // In a real application, you would fetch queries from your database here
+    // For now, we'll use an empty array
+    setRecentQueries([]);
+  }, []);
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
