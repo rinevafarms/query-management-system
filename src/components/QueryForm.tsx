@@ -118,8 +118,8 @@ export default function QueryForm() {
           <div key={index} className="border p-4 mb-2">
             <p><strong>Client:</strong> {query.clientName}</p>
             <p><strong>Email:</strong> {query.clientEmail}</p>
-            <p><strong>Title:</strong> {query.queryTitle}</p>
-            <p><strong>Description:</strong> {query.queryDescription}</p>
+            <p><strong>Title:</strong> {query.title}</p>
+            <p><strong>Description:</strong> {query.description}</p>
           </div>
         ))}
       </section>

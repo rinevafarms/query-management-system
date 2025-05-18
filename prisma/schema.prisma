@@ -13,7 +13,7 @@ model Client {
   email     String      @unique
   phone     String?
   createdAt DateTime    @default(now())
-  queries   ClientQuery[]
+  queries   ClientQuery[] @relation("ClientQueries")
 }
 
 model ClientQuery {
@@ -23,7 +23,7 @@ model ClientQuery {
   status       String   @default("PENDING")
   reference    String   @unique
   clientId     String
-  client       Client   @relation(fields: [clientId], references: [id])
+  client       Client   @relation("ClientQueries", fields: [clientId], references: [id])
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
   followUpDate DateTime?
