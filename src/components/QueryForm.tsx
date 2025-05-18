@@ -44,28 +44,32 @@ export default function QueryForm() {
                 message: "Invalid email address"
               }
             })}
-            className="w-full border p-2"
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            placeholder="Enter client email"
           />
-          {errors.clientEmail && <p className="text-red-500">{errors.clientEmail.message}</p>}
-        </div>
-        
-        <div>
-          <label className="block">Query Title</label>
-          <input 
-            {...register('queryTitle', { required: 'Query title is required' })}
-            className="w-full border p-2"
-          />
-          {errors.queryTitle && <p className="text-red-500">{errors.queryTitle.message}</p>}
-        </div>
-        
-        <div>
-          <label className="block">Query Description</label>
-          <textarea 
-            {...register('queryDescription', { required: 'Query description is required' })}
-            className="w-full border p-2"
-          />
-          {errors.queryDescription && <p className="text-red-500">{errors.queryDescription.message}</p>}
-        </div>
+          {errors.clientEmail && <p className="mt-1 text-sm text-red-600">{errors.clientEmail.message}</p>}
+          </div>
+          
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Query Title</label>
+            <input 
+              {...register('queryTitle', { required: 'Query title is required' })}
+              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              placeholder="Enter query title"
+            />
+            {errors.queryTitle && <p className="mt-1 text-sm text-red-600">{errors.queryTitle.message}</p>}
+          </div>
+          
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Query Description</label>
+            <textarea 
+              {...register('queryDescription', { required: 'Query description is required' })}
+              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              placeholder="Enter query description"
+              rows={4}
+            />
+            {errors.queryDescription && <p className="mt-1 text-sm text-red-600">{errors.queryDescription.message}</p>}
+          </div>
         
         <div>
           <label className="block">Follow-up Date (Optional)</label>
