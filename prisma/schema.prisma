@@ -1,0 +1,42 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Client {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  phone     String?
+  createdAt DateTime @default(now())
+  queries   ClientQuery[]
+}
+
+model ClientQuery {
+  id           String   @id @default(cuid())
+  title        String
+  description  String
+  status       String   @default("PENDING")
+  client       Client   @relation(fields: [clientId], references: [id])
+  clientId     String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  followUpDate DateTime?
+}
+
+// Using String instead of enum for SQLite compatibility
+model Query {
+  id           String   @id @default(cuid())
+  title        String
+  description  String
+  status       String   @default("PENDING")
+  client       Client   @relation(fields: [clientId], references: [id])
+  clientId     String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  followUpDate DateTime?
+}

@@ -1,0 +1,6 @@
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[context.production.environment]
+  NEXT_PUBLIC_SITE_URL = "https://query-system-app.windsurf.build"
