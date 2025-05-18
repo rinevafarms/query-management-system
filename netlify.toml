@@ -1,6 +1,9 @@
 [build]
-  command = "npm run build"
+  command = "npm run prisma:generate && npm run build"
   publish = ".next"
 
 [context.production.environment]
   NEXT_PUBLIC_SITE_URL = "https://query-system-app.windsurf.build"
+
+[build.environment]
+  PRISMA_GENERATE = "true"
