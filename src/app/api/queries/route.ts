@@ -42,8 +42,22 @@ export async function POST(request: Request) {
 export async function GET() {
   try {
     const queries = await prisma.clientQuery.findMany({
-      include: {
-        client: true,
+      select: {
+        id: true,
+        title: true,
+        description: true,
+        status: true,
+        reference: true,
+        createdAt: true,
+        updatedAt: true,
+        followUpDate: true,
+        client: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+          }
+        }
       },
       orderBy: {
         createdAt: 'desc',

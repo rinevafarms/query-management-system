@@ -9,8 +9,12 @@ interface QueryListProps {
     title: string;
     description: string;
     status: string;
+    reference: string;
     createdAt: Date;
+    updatedAt: Date;
+    followUpDate: Date | null;
     client: {
+      id: string;
       name: string;
       email: string;
     };
