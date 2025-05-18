@@ -7,13 +7,6 @@ import { Prisma } from '@prisma/client';
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState('new');
-  const [recentQueries, setRecentQueries] = useState([]);
-
-  useEffect(() => {
-    // In a real application, you would fetch queries from your database here
-    // For now, we'll use an empty array
-    setRecentQueries([]);
-  }, []);
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
@@ -54,7 +47,7 @@ export default function Home() {
           {activeTab === 'new' ? (
             <QueryForm />
           ) : (
-            <QueryList queries={recentQueries} />
+            <QueryList />
           )}
         </div>
       </div>

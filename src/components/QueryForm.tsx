@@ -14,11 +14,34 @@ type QueryFormData = {
 export default function QueryForm() {
   const { register, handleSubmit, formState: { errors }, reset } = useForm<QueryFormData>();
   const [queries, setQueries] = useState<QueryFormData[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const onSubmit = (data: QueryFormData) => {
-    setQueries([...queries, data]);
-    reset(); // Clear form after submission
-    // TODO: Implement actual submission to backend
+  const onSubmit = async (data: QueryFormData) => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response = await fetch('/api/queries', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to save query');
+      }
+
+      const result = await response.json();
+      setQueries([...queries, result.query]);
+      reset();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'An error occurred');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (

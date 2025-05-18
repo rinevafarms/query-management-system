@@ -7,7 +7,42 @@ interface QueryListProps {
   queries: any[];
 }
 
-export default function QueryList({ queries }: QueryListProps) {
+export default function QueryList() {
+  const [queries, setQueries] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetchQueries();
+  }, []);
+
+  const fetchQueries = async () => {
+    try {
+      const response = await fetch('/api/queries');
+      if (!response.ok) {
+        throw new Error('Failed to fetch queries');
+      }
+      const data = await response.json();
+      setQueries(data.queries);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to load queries');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (loading) {
+    return <div className="text-center py-8">Loading queries...</div>;
+  }
+
+  if (error) {
+    return <div className="text-center text-red-500 py-8">{error}</div>;
+  }
+
+  if (queries.length === 0) {
+    return <div className="text-center text-gray-500 py-8">No queries found</div>;
+  }
+
   return (
     <div className="space-y-4">
       {queries.map((query) => (
@@ -17,9 +52,11 @@ export default function QueryList({ queries }: QueryListProps) {
               <h3 className="font-semibold text-lg mb-1">{query.title}</h3>
               <p className="text-gray-600 text-sm mb-2">{query.description}</p>
               <div className="flex items-center space-x-4 text-sm text-gray-500">
-                <span>Client: {query.clientName}</span>
+                <span>Client: {query.client.name}</span>
                 <span>•</span>
                 <span>Created: {new Date(query.createdAt).toLocaleDateString()}</span>
+                <span>•</span>
+                <span>Status: {query.status}</span>
               </div>
             </div>
             <div className="flex items-center space-x-2">
