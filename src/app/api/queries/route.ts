@@ -41,6 +41,9 @@ export async function POST(request: Request) {
 export async function GET() {
   try {
     const queries = await prisma.clientQuery.findMany({
+      include: {
+        client: true,
+      },
       orderBy: {
         createdAt: 'desc',
       },

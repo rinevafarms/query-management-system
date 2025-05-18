@@ -6,8 +6,8 @@ import { useForm } from 'react-hook-form';
 type QueryFormData = {
   clientName: string;
   clientEmail: string;
-  queryTitle: string;
-  queryDescription: string;
+  title: string;
+  description: string;
   followUpDate?: Date;
 };
 
@@ -76,22 +76,22 @@ export default function QueryForm() {
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Query Title</label>
             <input 
-              {...register('queryTitle', { required: 'Query title is required' })}
+              {...register('title', { required: 'Query title is required' })}
               className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               placeholder="Enter query title"
             />
-            {errors.queryTitle && <p className="mt-1 text-sm text-red-600">{errors.queryTitle.message}</p>}
+            {errors.title && <p className="mt-1 text-sm text-red-600">{errors.title.message}</p>}
           </div>
           
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Query Description</label>
             <textarea 
-              {...register('queryDescription', { required: 'Query description is required' })}
+              {...register('description', { required: 'Query description is required' })}
               className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              placeholder="Enter query description"
               rows={4}
+              placeholder="Enter query description"
             />
-            {errors.queryDescription && <p className="mt-1 text-sm text-red-600">{errors.queryDescription.message}</p>}
+            {errors.description && <p className="mt-1 text-sm text-red-600">{errors.description.message}</p>}
           </div>
         
         <div>

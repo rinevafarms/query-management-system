@@ -4,7 +4,17 @@ import React, { useState, useEffect } from 'react';
 import { Prisma } from '@prisma/client';
 
 interface QueryListProps {
-  queries: any[];
+  queries: {
+    id: string;
+    title: string;
+    description: string;
+    status: string;
+    createdAt: Date;
+    client: {
+      name: string;
+      email: string;
+    };
+  }[];
 }
 
 export default function QueryList() {
