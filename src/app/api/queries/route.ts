@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 
 export async function POST(request: Request) {
   try {
-    const { clientName, clientEmail, queryTitle, queryDescription, followUpDate } = await request.json();
+    const { clientName, clientEmail, title, description, reference, followUpDate } = await request.json();
 
     // First, create or get the client
     const client = await prisma.client.upsert({
@@ -20,9 +20,10 @@ export async function POST(request: Request) {
     // Then create the query
     const query = await prisma.clientQuery.create({
       data: {
-        title: queryTitle,
-        description: queryDescription,
+        title: title,
+        description: description,
         status: 'PENDING',
+        reference: reference,
         clientId: client.id,
         followUpDate: followUpDate ? new Date(followUpDate) : null,
       },

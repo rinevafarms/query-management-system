@@ -64,6 +64,8 @@ export default function QueryList() {
               <div className="flex items-center space-x-4 text-sm text-gray-500">
                 <span>Client: {query.client.name}</span>
                 <span>•</span>
+                <span>Reference: {query.reference}</span>
+                <span>•</span>
                 <span>Created: {new Date(query.createdAt).toLocaleDateString()}</span>
                 <span>•</span>
                 <span>Status: {query.status}</span>

@@ -8,6 +8,7 @@ type QueryFormData = {
   clientEmail: string;
   title: string;
   description: string;
+  reference: string;
   followUpDate?: Date;
 };
 
